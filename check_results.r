@@ -1,11 +1,11 @@
 library(raster)
-setwd("/home/huijieqiao/Erin_To_Rerun/20190808/DifferentMask/Pliocene_1_5deg_Berkeley_gradient/results/scenario.seed_1183.dispersal_Moderate.nb_medium")
-mask1<-raster("/home/huijieqiao/Erin_To_Rerun/20190808/DifferentMask/Pliocene_1_5deg_Berkeley_gradient/env/1200.tif")
-mask2<-raster("/home/huijieqiao/Erin_To_Rerun/20190808/DifferentMask/Pliocene_1_5deg_Berkeley_gradient/env/1199.tif")
+setwd("/home/huijieqiao/Erin_To_Rerun/20190814/DifferentMask/Ord/results/scenario.seed_4032.dispersal_Poor.nb_medium")
+mask1<-raster("/home/huijieqiao/Erin_To_Rerun/20190814/DifferentMask/Ord/env/1200.tif")
+mask2<-raster("/home/huijieqiao/Erin_To_Rerun/20190814/DifferentMask/Ord/env/1199.tif")
 
 
 i=100
-for (i in seq(from=100, to=8500, by=100)){
+for (i in seq(from=100, to=8000, by=100)){
   
   
 
