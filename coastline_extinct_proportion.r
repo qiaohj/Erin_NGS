@@ -1,4 +1,4 @@
-setwd("~/Erin_To_Rerun/Script")
+setwd("~/Erin_To_Rerun/Script/Erim_NGS")
 library("raster")
 
 source("functions.r")

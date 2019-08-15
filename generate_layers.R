@@ -19,6 +19,7 @@ for (i in c(1:nrow(df))){
   dir.create(sprintf("../Data/Env/%s/%s", item$S, item$P), showWarnings = F)
   dir.create(sprintf("../Data/Env/%s/%s/env", item$S, item$P), showWarnings = F)
   writeRaster(coastline1, sprintf("../Data/Env/%s/%s/env/1200.tif", item$S, item$P), overwrite=TRUE)
+  writeRaster(coastline1, sprintf("../Data/Env/%s/%s/env/mask.tif", item$S, item$P), overwrite=TRUE)
   
   coastline2<-raster(item$coastline2)
   
