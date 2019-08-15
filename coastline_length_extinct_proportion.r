@@ -79,9 +79,9 @@ for (folder in folders){
       nb<-"broad"
       da<-"Good"
       print(paste(scs, ttt))
-      for (nb in c("broad", "medium", "narrow")){
+      for (nb in c("medium", "narrow")){
         TEZ<-raster(sprintf("../../TEZ/%s/%s_%s.tif",  folder, filename, nb))
-        for (da in c("Good", "Moderate", "Poor")){
+        for (da in c("Good", "Poor")){
           p_all<-p_all_t
           sp_extinct_file<-sprintf("%s/heatmap/%s/%s/sp_extinct_%s_%s.tif", targets[1], folder, filename, nb, da)
           sp_exist_file<-sprintf("%s/heatmap/%s/%s/sp_exist_%s_%s.tif", targets[1], folder, filename, nb, da)
