@@ -1,4 +1,5 @@
 setwd("~/Erin_To_Rerun/Script")
+source("Erim_NGS/functions.r")
 
 df<-read.table("../Tables/extinct_proportion_direction_removed_island.csv", head=T, sep=",", stringsAsFactors = F)
 
@@ -52,6 +53,9 @@ for (w in c(1)){
         }
         df_item$label<-paste(df_item$da, df_item$scenario_abbr)
         df_item$scenario_abbr<-factor(df_item$scenario_abbr, levels=c("Ord", "Eoc", "Plio"))
+        dir.create(sprintf("../Tables/direction_final_island/%s", sc))
+        write.table(df_item, sprintf("../Tables/direction_final_island/%s/%s_%d_%s_island.csv", sc, nb, w, tez), row.names = F, sep=",")
+        
         df_item_se<-summarySE(df_item, "extinct_proportion_overall", c("direction", "da", "scenario_abbr", "label"))
         dodge_width<-0.1
         p<-ggplot(df_item_se) + 

@@ -36,7 +36,7 @@ df_result_lat<-data.frame()
 for (folder in folders){
   scs <- sprintf("../../coastline_direction/%s", folder)
   scs_items<-list.files(scs, full.names = F, pattern = "\\.tif$")
-  ttt<-scs_items[1]
+  ttt<-scs_items[3]
   for (ttt in scs_items){
     filename<-tools::file_path_sans_ext(ttt)
     sc<-NA
@@ -77,7 +77,7 @@ for (folder in folders){
     p_all_t[which(p_all_t$island==1),]$direction<-2
     values(direction)[!is.na(values(direction))]<-p_all_t$direction
     plot(direction)
-    
+    writeRaster(direction, sprintf("%s/%s", gsub("coastline_direction", "coastline_direction_with_island", scs), ttt), overwrite=T)
     nb<-"broad"
     da<-"Good"
     print(paste(scs, ttt))
