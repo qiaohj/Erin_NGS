@@ -16,7 +16,7 @@ threshold_max<-100
 args = commandArgs(trailingOnly=TRUE)
 
 is_threshold<-as.logical(args[1])
-is_threshold<-F
+is_threshold<-T
 if (is_threshold){
   folder<-"heatmap_diection_coastline_with_island_Antarctica"
 }else{
@@ -25,7 +25,7 @@ if (is_threshold){
 
 
 
-nb<-"broad"
+nb<-"narrow"
 da<-"Good"
 for (sp in sps){
   

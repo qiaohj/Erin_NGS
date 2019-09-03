@@ -46,16 +46,16 @@ threshold_max<-100
 args = commandArgs(trailingOnly=TRUE)
 
 is_threshold<-as.logical(args[1])
-is_threshold<-F
+is_threshold<-T
 if (is_threshold){
-  folder<-"heatmap__lat_Antarctica"
+  folder<-"heatmap_lat_Antarctica"
 }else{
   folder<-"heatmap_lat"
 }
 
 
 
-nb<-"broad"
+nb<-"narrow"
 da<-"Good"
 for (sp in sps){
   
@@ -77,6 +77,8 @@ for (sp in sps){
   
   for (da in c("Good", "Poor")){
     for (nb in c("medium", "narrow")){
+      #tez<-raster(sprintf("%s_%s.tif", gsub(base1, "", gsub(base2, "../../TEZ", sp)), nb))
+      
       target<-sprintf("../../%s%s.lat_%s_%s.csv", folder, gsub(base2, "", gsub(base1, "", sp)), nb, da)
       if (file.exists(target)){
         next()

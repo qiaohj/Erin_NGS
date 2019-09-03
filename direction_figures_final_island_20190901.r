@@ -3,14 +3,15 @@ source("Erim_NGS/functions.r")
 
 
 if (F){
-  folder<-"../heatmap_diection_coastline_with_island"
+  folder<-"../heatmap_diection_coastline_with_island_Antarctica"
   folders<-list.files(folder, recursive = T, full.names=T)
   f<-folders[1]
   fff<-data.frame()
   for (f in folders){
     print(f)
     items<-strsplit(gsub(".csv", "", f), "_")
-    items2<-strsplit(items[[1]][5], "/")
+    #items2<-strsplit(items[[1]][5], "/")
+    items2<-strsplit(items[[1]][6], "/")
     df<-read.table(f, head=T, sep=",", stringsAsFactors = F)
     df$nb<-items[[1]][length(items[[1]])-1]
     df$da<-items[[1]][length(items[[1]])]
@@ -24,11 +25,11 @@ if (F){
       fff<-rbind(fff, df)
     }
   }
-  write.table(fff, "../Tables/extinct_proportion_island_new_20190901.csv", row.names = F, sep=",")
+  write.table(fff, "../Tables/extinct_proportion_island_new_20190901_Antarctica.csv", row.names = F, sep=",")
   
 }
 
-df<-read.table("../Tables/extinct_proportion_island_new_20190901.csv", head=T, sep=",", stringsAsFactors = F)
+df<-read.table("../Tables/extinct_proportion_island_new_20190901_Antarctica.csv", head=T, sep=",", stringsAsFactors = F)
 
 df$scenario<-NA
 
@@ -52,7 +53,7 @@ df[which(grepl("FOAM_Eoc", df$ttt)), "scenario_abbr"]<-"Eoc"
 df[which(grepl("Paul_Eoc_Oligocene", df$ttt)), "scenario_abbr"]<-"Eoc"
 df[which(grepl("Paul_Plio_Pleis", df$ttt)), "scenario_abbr"]<-"Plio"
 df$extinct_proportion<-df$sp_extinct/df$sp_exist
-write.table(df, "../Tables/extinct_proportion_island_new_20190901.csv", row.names = F, sep=",")
+write.table(df, "../Tables/extinct_proportion_island_new_20190901_Antarctica.csv", row.names = F, sep=",")
 
 library(ggplot2)
 w=1
@@ -81,8 +82,8 @@ for (w in c(1)){
       }
       df_item$label<-paste(df_item$da, df_item$scenario_abbr)
       df_item$scenario_abbr<-factor(df_item$scenario_abbr, levels=c("Ord", "Eoc", "Plio"))
-      dir.create(sprintf("../Tables/direction_final_island_20190901/%s", sc))
-      write.table(df_item, sprintf("../Tables/direction_final_island_20190901/%s/%s_%d_island.csv", sc, nb, w), row.names = F, sep=",")
+      dir.create(sprintf("../Tables/direction_final_island_20190901_Antarctica/%s", sc))
+      write.table(df_item, sprintf("../Tables/direction_final_island_20190901_Antarctica/%s/%s_%d_island.csv", sc, nb, w), row.names = F, sep=",")
       
       df_item_se<-summarySE(df_item, "extinct_proportion", c("direction", "da", "scenario_abbr", "label"))
       dodge_width<-0.1
@@ -95,8 +96,8 @@ for (w in c(1)){
                   position=position_dodge(dodge_width))
       
       p<-p+ scale_colour_manual(values = colors) +theme_bw()
-      dir.create(sprintf("../Figures/direction_final_island_20190901/%s", sc))
-      ggsave(sprintf("../Figures/direction_final_island_20190901/%s/%s_%d_island.pdf", sc, nb, w), p, useDingbats=FALSE)
+      dir.create(sprintf("../Figures/direction_final_island_20190901_Antarctica/%s", sc))
+      ggsave(sprintf("../Figures/direction_final_island_20190901_Antarctica/%s/%s_%d_island.pdf", sc, nb, w), p, useDingbats=FALSE)
     }
   }
 }

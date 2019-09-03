@@ -1,7 +1,7 @@
 setwd("~/Erin_To_Rerun/Script/Erim_NGS")
 
 if (F){
-  folder<-"../../heatmap_lat"
+  folder<-"../../heatmap_lat_Antarctica"
   folders<-list.files(folder, recursive = T, full.names=T)
   f<-folders[1]
   fff<-data.frame()
@@ -22,10 +22,11 @@ if (F){
       fff<-rbind(fff, df)
     }
   }
-  write.table(fff, "../../Tables/extinct_proportion_lat_new_20190901.csv", row.names = F, sep=",")
+  write.table(fff, "../../Tables/extinct_proportion_lat_Antarctica_new_20190901.csv", row.names = F, sep=",")
   
 }
-df<-read.table("../../Tables/extinct_proportion_lat_new_20190901.csv", head=T, sep=",", stringsAsFactors = F)
+source("functions.r")
+df<-read.table("../../Tables/extinct_proportion_lat_Antarctica_new_20190901.csv", head=T, sep=",", stringsAsFactors = F)
 
 #remove the useless records
 df$edge_width<-1
@@ -53,7 +54,7 @@ df[which(grepl("FOAM_Eoc", df$ttt)), "scenario_abbr"]<-"Eoc"
 df[which(grepl("Paul_Eoc_Oligocene", df$ttt)), "scenario_abbr"]<-"Eoc"
 df[which(grepl("Paul_Plio_Pleis", df$ttt)), "scenario_abbr"]<-"Plio"
 
-write.table(df, "../../Tables/extinct_proportion_lat_new_20190901.csv", row.names = F, sep=",")
+write.table(df, "../../Tables/extinct_proportion_lat_Antarctica_new_20190901.csv", row.names = F, sep=",")
 
 table(df$scenario_abbr)
 
@@ -85,7 +86,6 @@ for (i in c(1:nrow(combs))){
     sc<-"GCM"
   }
   item<-df[which(df$scenario %in% scs[[comb$sc]]),]
-  item<-item[which(item$type==sc),]
   if (comb$nb!="all"){
     item<-item[which(item$nb==comb$nb),]
   }
@@ -109,7 +109,7 @@ for (i in c(1:nrow(combs))){
       geom_line(aes(x=lat, y=mean, color=scenario_abbr))+
       ylim(0, 1)+scale_colour_manual(values = colors) + scale_fill_manual(values = colors) + theme_bw()
     
-    ggsave(sprintf("../../Figures/lat_by_scenario_new_20190901/%s/%s_%s_%d.pdf", comb$sc, comb$nb, comb$da,
+    ggsave(sprintf("../../Figures/lat_Antarctica_by_scenario_new_20190901/%s/%s_%s_%d.pdf", comb$sc, comb$nb, comb$da,
                    comb$width), p)
   }
 }
